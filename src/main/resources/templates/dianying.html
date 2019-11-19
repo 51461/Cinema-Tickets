@@ -1,0 +1,439 @@
+<div id="main">
+	<div>
+		<table class="table">
+			<tr>
+				<td rowspan="6"><img class="dytp" src="" width="260px" /></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><font class="text">电影名：</font></td>
+				<td class="dym">正在加载中...</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><font class="text">上映时间：</font></td>
+				<td class="sysh">正在加载中...</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><font class="text">时长：</font></td>
+				<td class="sc">正在加载中...</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><font class="text">评分：</font></td>
+				<td class="pf">正在加载中...</td>
+			</tr>
+			<tr>
+				<td></td>
+				
+				
+				<td>
+					<!-- <input type="button"
+						value="电影评价和评分" class="pj"
+						style="width: 260px; height: 40px; letter-spacing: 10px; font-size: large;" onclick="open()"/> -->
+					<p>
+						<input type="button" value="电影评价和评分"
+							style="width: 260px; height: 40px; letter-spacing: 10px; font-size: large;"
+							onclick="document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'"></input>
+					</p>
+
+
+					<div id="light" class="white_content">
+						<!-- 弹框 -->
+						<div id="tk" title="电影评价和评分">
+							<p style="font-size: 30px">
+								评&nbsp;&nbsp;分&nbsp;&nbsp;： <select id="pingfen"
+									style="height: 45px; width: 100px; font-size: 15px;">
+									<option value="11">--评分--</option>
+									<option value="0">0分</option>
+									<option value="1">1分</option>
+									<option value="2">2分</option>
+									<option value="3">3分</option>
+									<option value="4">4分</option>
+									<option value="5">5分</option>
+									<option value="6">6分</option>
+									<option value="7">7分</option>
+									<option value="8">8分</option>
+									<option value="9">9分</option>
+									<option value="10">10分</option>
+								</select>
+							</p>
+							<p style="font-size: 25px">
+								评&nbsp;&nbsp;论&nbsp;&nbsp;： <br />
+								<textarea class="pingLun" style="resize: none;"
+									placeholder="输入评价信息！" cols=100px rows=20px id="pl"></textarea>
+							</p>
+							<div style="float: right; font-size: 25px;">
+								<div
+									onclick="document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'">返回</div>
+								<br />
+								<div class="tj" onclick="pingJiaNeiRong(this)"
+									style="border: 1px; background-color: white; font-size: 25px">
+									<div
+										onclick="document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'">提交</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+
+
+
+
+					<div id="fade" class="black_overlay"></div>
+				</td>
+				
+				
+				<td></td>
+				<td class="button2"><input type="button" value="购票"
+					onclick="goupiao1(this)"
+					style="width: 260px; height: 40px; letter-spacing: 10px; font-size: large;" /></td>
+			</tr>
+		</table>
+		<div>
+		<span id="dyriqi"></span>
+		<span id="dyyyuan"></span>
+		<span id="dybfsj"></span>
+		<span id="dyyt"></span>
+		<span id="price"></span>
+		</div>
+		<hr />
+	</div>
+	<div id="goupiaos">
+		<font style="font-weight: bold; padding-left: 110px; font-size: 30px;">剧情简介</font>
+		<table class="jianjie">
+			<tr>
+				<td class="jqjj">正在加载中...</td>
+				<hr />
+			</tr>
+		</table>
+		<br /> <br /> <br /> <br />
+		<hr />
+
+		<font style="font-weight: bold; padding-left: 110px; font-size: 30px;">主演和导演</font>
+		<hr />
+		<div>
+			<ul>
+				<li><img class="photo" src=""></li>
+			</ul>
+		</div>
+
+		<div class="yanyuan">
+
+			<table class="tableOne" align="center">
+				<tr class="bodyOne">
+					<td><a id=yy1 href="" target="_blank"><img class="yy1"
+							src="" width="260px" height="380px" /></a></td>
+					<td><a id=yy2 href="" target="_blank"><img class="yy2"
+							src="" width="260px" height="380px" /></a></td>
+					<td><a id=yy3 href="" target="_blank"><img class="yy3"
+							src="" width="260px" height="380px" /></a></td>
+					<td><a id=yy4 href="" target="_blank"><img class=yy4
+							src="" width="260px" height="380px" /></a></td>
+				</tr>
+				<tr class="bodyTwo" align="center">
+					<td><a id=yy5 href="" target="_blank"><input class="yy5"
+							type="button" value=""
+							style="width: 260px; height: 40px; letter-spacing: 10px; font-size: large;" /></a></td>
+					<td><a id=yy6 href="" target="_blank"><input class="yy6"
+							type="button" value=""
+							style="width: 260px; height: 40px; letter-spacing: 10px; font-size: large;" /></a></td>
+					<td><a id=yy7 href="" target="_blank"><input class="yy7"
+							type="button" value=""
+							style="width: 260px; height: 40px; letter-spacing: 10px; font-size: large;" /></a></td>
+					<td><a id=yy8 href="" target="_blank"><input class="yy8"
+							type="button" value=""
+							style="width: 260px; height: 40px; letter-spacing: 10px; font-size: large;" /></a></td>
+				</tr>
+			</table>
+
+		</div>
+		</div>
+		<br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+		<br /> <br /> <br /> <br />
+
+
+		<div id="pingjia">
+			<h3 style="font-size: 30px;" class="pj">精彩点评:</h3>
+			<hr />
+			<ul>
+				<li id="pjnr" class="pjnr"
+					style="font-size: 25px; padding-left: 155px;">
+					<table style="border: 2px">
+						<tbody id="tbodyId">
+
+							<tr>
+								<td class="ping1"><hr color="black" />本作品暂无评论，快来抢第一个沙发吧！</td>
+							</tr>
+							
+						</tbody>
+
+
+					</table>
+				</li>
+			</ul>
+		</div>
+
+		
+
+
+		<script type="text/javascript">
+			function pingJiaNeiRong(obj) {
+				var pingFen = document.getElementById("pingfen").value
+				var pingLun = $(".pingLun").val().trim()
+				var dianYingMing = $(".dym").text();
+					 //alert(dianYingMing)
+					 //alert(pingFen)
+					// alert(pingLun)
+				if (pingFen > 10) {
+					alert("提交失败,没有选择一个分数.")
+					return;
+				} else if (pingLun == "" || pingLun == null) {
+					alert("提交失败,没有填写内容.")
+					return;
+				}
+					 contentParams = {"content":pingLun}
+					 var dizhi = "doFindBadWord"
+
+						 $.ajaxSettings.async = false;
+					 $.post(dizhi,contentParams,function(result){
+						 if(result.state != 1){
+							 alert(result.message)
+							 
+							$.ajaxSettings.async = true;
+							 return false
+						 }else{
+							 alert("无敏感词")
+							 
+							 var url = "pinglun/ineasePingLun";
+								var userName=yhm
+								//dym
+								var params = {
+									"pingFen" : pingFen,
+									"pingLun" : pingLun,
+									"dianYingMing" : dianYingMing,
+									"userName":userName
+								}
+								$.post(url, params)
+								alert("提交成功")
+						 }
+					 })
+					 
+					 
+				
+			}
+			
+			
+			$(function() {
+				doLoadUI("button2", "doGouPiaoUI");
+			})
+			function doLoadUI(id, url) {
+				$("." + id).click(function() {
+					$("#goupiaos").load(url);
+
+				})
+			}
+			function goupiao1(obj) {
+				
+				var url = "doGouPiao"
+				var city = document.getElementById("choseCity").value
+				//alert("city:"+city)
+				var params = {
+					"name" : $(".dym").html(),
+					"city" : city
+				}
+				$.post(url, params, function(result) {
+					if (result.state == 1) {
+						doSetTableBodyRows(result.data);
+					} else {
+						alert("获取失败")
+					}
+				})
+			}
+			/*  function doSetTableBodyRows(obc){
+					$(".yingyuan").empty();
+					alert(obc[i].shiJian);
+					$(".yingyuan").append(obc.shiJian)
+			   }  */
+			function doSetTableBodyRows(obc) {
+				//1.获取tbody对象,并清空
+				
+				console.log(obc)
+				var tBody = $("#tbodyId");
+				tBody.empty();
+				//2.将记录records进行呈现
+				//2.1迭代记录集
+			
+				var abc = new Array();
+				abc.push(obc[0].shiJIan);
+				for (var i = 0; i < obc.length; i++) {
+					var sj = true;
+					for (var j = 0; j < abc.length; j++) {
+						if (abc[j]!=obc[i].shiJIan) {
+						}else{
+							sj=false;
+						}
+					}
+					if (sj) {
+						abc.push(obc[i].shiJIan)
+					}
+				}
+				console.log(abc)
+				var trs=$("<tr></tr>");
+				for(var i=0;i<abc.length;i++){
+					var tds2="<td><input type='button' value='"+abc[i]+"' class='flag riqi-i' id='"+i+"' onclick='fun(this)'/></td>";
+					trs.append(tds2);
+					tBody.append(trs);
+				}
+				
+				var yingYuanArray = new Array()
+				for (var i = 0; i < obc.length; i++) {
+					var yingYuanMing = obc[i].yingYuanMingCheng;
+					sadkj(yingYuanMing)
+				}
+				function sadkj(obcj) {
+					var b = true;
+					for (var j = 0; j < yingYuanArray.length; j++) {
+						if (yingYuanArray[j] == obcj) {
+							b = !b;
+						}
+					}
+					if (b) {
+						yingYuanArray[yingYuanArray.length] = yingYuanMing
+						var tr = $("<tr></tr>");
+						//2.3 创建多个td对象
+						var tds = doCreateTds(obc[i]);
+						//2.4 将td对象追加到tr中
+						tr.append(tds);
+						//2.5 将tr追加到tbody中
+						tBody.append(tr);
+						$(function() {
+							doLoadUI("maiPiao", "doMaiPiaoUI");
+						})
+						function doLoadUI(id, url) {
+							$("." + id).click(function() {//事件处理函数
+								$("#goupiaos").load(url);
+								//load函数为jQuery中的一个异步函数
+							})
+						}
+					}
+				}
+				
+				
+			}
+			var redbull=0;
+			function doCreateTds(data) {
+				redbull++;
+				var tds = "<td>"
+						+ "<font class='"+redbull+"'>"
+						+ data.yinYuanMingCheng
+						+ "</font>"
+						+ "</td>"
+						+ "<td>"
+						+ "<font class='test'>价格："
+						+ data.jiaGe
+						+ "</font>"
+						+ "</td>"
+						+ "<td>"
+						+ "<input type='button'id='"+redbull+"' value='买票' class='maiPiao' onclick='maipiao(this)'/>"
+						+ "</td>";
+				return tds;
+			}
+
+						
+		</script>
+		
+		
+		<style>
+			.black_overlay {
+				display: none;
+				position: absolute;
+				top: 0%;
+				left: 0%;
+				width: 100%;
+				height: 100%;
+				background-color: black;
+				z-index: 1001;
+				-moz-opacity: 0.8;
+				opacity: .80;
+				filter: alpha(opacity = 88);
+			}
+			
+			.white_content {
+				display: none;
+				position: absolute;
+				top: 25%;
+				left: 25%;
+				width: 55%;
+				height: 55%;
+				padding: 20px;
+				border: 10px solid orange;
+				background-color: white;
+				z-index: 1002;
+				overflow: auto;
+			}
+			
+			.ping1 {
+				font-weight: bold;
+				font-family: '黑体';
+				font-size: 28px;
+			}
+			
+			.ping2 {
+				color: gray;
+				font-size: 20px;
+			}
+			
+			.ping3 {
+				font-size: 25px;
+				text-indent: 2em;
+				word-break: break-all;
+			}
+			.anniu{
+			width: 85px;
+			height: 60px;
+			}
+			
+			
+			
+			/* 选日期 */
+			.riqi-1:hover, .riqi-2:hover{
+            color: #fff;
+            border-color: #b1b0b0;
+            background: #b1b0b0;
+            border: none;
+        }
+.start{
+            cursor: pointer;
+            
+        }
+ .end{
+            cursor: pointer;
+            color: #fff;
+            background: red;
+            border: none;
+  }
+			
+		</style>
+			<script>/* 选日期 */
+	$(function () {
+	    //加载事件
+	        var collection = $(".flag");
+	        $.each(collection, function () {
+	            $(this).addClass("start");
+	        });
+	    });
+	    //单击事件
+	 function fun(dom) {
+	        var collection = $(".flag");
+	        $.each(collection, function () {
+	            $(this).removeClass("end");
+	            $(this).addClass("start");
+	        });
+	        $(dom).removeClass("start");
+ 	        $(dom).addClass("end");
+ 	        
+	    }
+</script>

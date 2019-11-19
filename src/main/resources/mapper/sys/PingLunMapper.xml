@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.java98k.alipay.dao.PingLunDao">
+	<insert id="addPL"
+		parameterType="com.java98k.alipay.vo.PingLunPojo">
+		insert into pingfenpinglunbiao
+		values(null,#{pingFen},#{pingLun},#{dianYingID},now(),#{yongHuID})
+	</insert>
+	<select id="findAllPingLun" resultType="com.java98k.alipay.vo.PingLunPojo">
+		select * from pingfenpinglunbiao p
+		where p.dianYingID=#{id}
+	</select>
+	<select id="findByYongHuMing" resultType="String">
+		select y.yongHuMing
+		from yonghubiao y
+		where y.yongHuID=#{id}
+	</select>
+	<select id="findAllFenShuByDianYingid" resultType="Double">
+		select p.pingFen 
+		from pingfenpinglunbiao p
+		where p.dianYingID=#{id}
+	</select>
+</mapper>

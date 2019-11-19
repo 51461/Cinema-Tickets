@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<title>指定IP定位</title>
+<style type="text/css">
+*{
+    margin:0px;
+    padding:0px;
+}
+body, button, input, select, textarea {
+    font: 12px/16px Verdana, Helvetica, Arial, sans-serif;
+}
+#container{
+  min-width:600px;
+  min-height:767px;
+  }
+</style>
+<script charset="utf-8" src="https://map.qq.com/api/js?v=2.exp&key=WCOBZ-VKG3Q-45G5A-G4V5F-UT4GE-6WFDH"></script>
+<script>
+var citylocation,map,marker = null;
+var init = function() {
+    var center = new qq.maps.LatLng(39.916527,116.397128);
+    var city = document.getElementById("city");
+    map = new qq.maps.Map(document.getElementById('container'),{
+        center: center,
+        zoom: 13
+    });
+    //获取  城市位置信息查询 接口  
+    citylocation = new qq.maps.CityService({
+        //设置地图
+        map : map,
+
+        complete : function(results){
+            city.style.display = 'inline';
+            city.innerHTML = '所在位置: ' + results.detail.name;
+            map.setCenter(results.detail.latLng);
+            var marker = new qq.maps.Marker({//设置marker标记
+                map:map,
+                position: results.detail.latLng
+            });
+        }
+    });
+}
+
+function geolocation_ip() {
+    var clientip = document.getElementById("client_ip").value;
+    var city = document.getElementById("city");
+      //调用查询ip接口查询信息
+    citylocation.searchCityByIP(clientip);
+}
+</script>
+</head>
+<body onload="init()">
+<div>
+    <input id="client_ip" type="textbox">
+    <input type="button" value="search" onclick="geolocation_ip()">
+    <span style="height:30px;display:none" id="city"></span>
+</div>
+<div id="container"></div>
+<script type='text/javascript' src='js/jquery-1.8.3.min.js'></script>
+	<script type='text/javascript' src='js/jquery.easing.1.3.js'></script>
+	<script type='text/javascript'
+		src='js/prettyphoto/jquery.prettyPhoto.js'></script>
+	<script type='text/javascript' src='js/jflickrfeed.js'></script>
+	<script type='text/javascript' src='js/jquery.liveSearch.js'></script>
+	<script type='text/javascript' src='js/jquery.form.js'></script>
+	<script type='text/javascript' src='js/jquery.validate.min.js'></script>
+	<script type='text/javascript' src='js/custom.js'></script>
+</body>
+<script>
+ $(function(){
+
+		 var url = location.search; //获取url中"?"符后的字串
+		 if (url.indexOf("?") != -1) {
+		 var str = url.substr(1);
+		 strs = str.split("&");
+		 var ip = decodeURIComponent(strs[0].replace("ip=",""));
+		 $("#client_ip").val(ip)
+		 console.log(ip)
+		 }
+}) 
+</script>
+</html>

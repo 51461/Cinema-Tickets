@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Title</title>
+</head>
+<body>
+	<H1>支付宝支付</H1>
+	<hr>
+	<form action="order/alipay" method="post">
+		*商户订单 :<br> <input id="ddbh" readonly="readonly"
+			name="out_trade_no"></input><br> *订单名称 :<br> <input
+			id="ddmc" readonly="readonly" type="text" name="subject"></input><br>
+		*付款金额 :<br> <input id="zf1" readonly="readonly"
+			name="total_amount"></input><br> 商品描述 :<br> <input
+			type="text" name="body"><br> <input type="submit"
+			value="支付宝支付">
+	</form>
+</body>
+<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript">
+	$(function() {
+		var pc = GetQueryString("palce")
+		$("#ddbh").val(sNow)
+		$("#zf1").val(pc)
+		$("#ddmc").val("电影票")
+	})
+	var ids = GetQueryString("ids")
+	var changciid = GetQueryString("changciid")
+	var yhm=GetQueryString("yhm")
+	var url="pay/doZhiFuB"
+	var params={
+			"changciid":changciid,
+			"ids":ids,
+			"yhm":yhm
+	}
+	$.post(url,params,function(result){
+		
+	})
+	function GetQueryString(name) {
+		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+		var r = window.location.search.substr(1).match(reg);
+		if (r != null)
+			return unescape(r[2]);
+		return null;
+	}
+	var sNow = "";
+	function GetDateNow() {
+		var vNow = new Date();
+		sNow += String(vNow.getFullYear());
+		sNow += String(vNow.getMonth() + 1);
+		sNow += String(vNow.getDate());
+		sNow += String(vNow.getHours());
+		sNow += String(vNow.getMinutes());
+		sNow += String(vNow.getSeconds());
+		sNow += String(vNow.getMilliseconds());
+	}
+	GetDateNow();
+</script>
+</html>

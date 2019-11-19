@@ -1,0 +1,14 @@
+spring:
+  datasource: 
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql:///dyygp?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT
+    username: root
+    password: root123
+
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    
+mybatis: 
+  mapper-locations: mapper/sys/*.xml

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="utf-8">
+<title>登录界面</title>
+<link rel="stylesheet" href="css/reset.css" />
+<link rel="stylesheet" href="css/common.css" />
+<link rel="stylesheet" href="css/font-awesome.min.css" />
+</head>
+<body>
+	<div class="wrap login_wrap">
+		<div class="content">
+			<div class="logo"></div>
+			<div class="login_box">
+
+				<div class="login_form" id="login_form">
+					<div class="login_title">登录</div>
+					<form action="#" method="post">
+						<div style="text-align: center; color: red" id="err-ms"></div>
+						<div class="form_text_ipt">
+							<input class="checkUsername" name="username" id="username"
+								type="text" placeholder="手机号/邮箱" onblur="doCheckUsername()"
+								onfocus="setMsg('')">
+							<!-- 							<input name="username" id="username" type="text"
+								placeholder="手机号/邮箱" onblur="checkUsername()"
+								onfocus="setMsg('')"> -->
+						</div>
+						<div class="ececk_warning" id="err-msg">
+							<span>手机号/邮箱不能为空</span>
+						</div>
+						<div class="form_text_ipt">
+							<input id="password" name="password" type="password"
+								placeholder="密码">
+						</div>
+						<div class="ececk_warning">
+							<span>密码不能为空</span>
+						</div>
+						<div class="form_check_ipt">
+							<div class="left check_left">
+								<label><input name="" type="checkbox" id="rememberId">
+									下次自动登录</label>
+							</div>
+							<div class="right check_right">
+								<a class="forgetPwd">忘记密码</a>
+							</div>
+						</div>
+						<div class="form_btn">
+							<button type="button" class="btn">登录</button>
+						</div>
+						<div class="form_reg_btn">
+							<span>还没有帐号？</span><a class="register">马上注册</a>
+						</div>
+					</form>
+					<div class="other_login">
+						<div class="left other_left">
+							<span>其它登录方式</span>
+						</div>
+						<div class="right other_right">
+							<input class="qtdl" type="button" value="手机验证登录" />
+						</div>
+						<div>
+							<button type="button" class="glydl">管理员登录</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/common.js"></script>
+	<div style="text-align: center;">
+		<p></p>
+	</div>
+	<script type="text/javascript">
+		$(function() {
+			$(".btn").click(doLogin);
+			$(".glydl").click(doLogin2);
+			/* $(".form_text_ipt").on("onblur", ".checkUsername", doCheckUsername); */
+		});
+		function doLogin2() {
+			window.location.href = "doLogin2";
+		}
+
+		function doLogin() {
+
+			var params = {
+				username : $("#username").val(),
+				password : $("#password").val(),
+				isRememberMe : $("#rememberId").prop("checked")
+			}
+			console.log(params.isRememberMe);
+			var url = "doLogin";
+			console.log("params", params);
+			$.post(url, params, function(result) {
+				if (result.state == 1) {
+					//$("#err-ms").html("<span>"+result.message+"</span>");
+					//跳转到indexUI对应的页面
+					var yhm = $("#username").val()
+					location.href = "doIndexUI?yhm=" + yhm
+				} else {
+					//var message="用户名不存在，请重新输入！！！";
+					console.log(result.message);
+					//alert(result.message);
+					$("#err-ms").html("<span>" + result.message + "</span>");
+				}
+				return false;//防止刷新时重复提交
+			});
+		}
+
+		/* 实现AJAX检查用户名是否存在 */
+		function doCheckUsername() {
+			//1.获取用户名
+			var username = $("#username").val().trim();
+			//2.判断用户名是否为空
+			if (username == "") {
+				setMsg("用户名不能为空!");
+				return;
+			}
+		}
+		//设置提示消息到id为err-msg的div中
+		function setMsg(msg) {
+			console.log(msg)
+			$("#err-msg").html(msg);
+		}
+
+		$(function() {
+			doLoadUI("forgetPwd", "doForgetPwdUI");
+			doLoadUI("register", "doRegisterUI");
+			doLoadUI("qtdl", "doQiTaUI");
+			//  doLoadUI("right other_right","user/doUserListUI.do");
+		});
+		function doLoadUI(class1, url) {
+			$("." + class1).click(function() {
+				//load函数是将url对应的资源加载到指定位置
+				$(".login_box").load(url);
+				/* $.get(url); */
+			});
+		}
+	</script>
+</body>
+</html>

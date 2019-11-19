@@ -1,0 +1,136 @@
+<div class=riqi>
+	<p>日期选择:</p>
+
+<table class="tableTwo">
+	<tbody id="tbodyId">
+	<tr>
+		<td style="font-size: 25px;" class="maipiao2">正在加载中。。。<font class="text"></font></td>
+		<td><input type="button" value="买票" class="maipiao" onclick=maipiao() />
+		</td>
+	</tr>
+	<tr>
+		<td style="font-size: 25px;" class="maipiao3">正在加载中。。。<font class="text"></font></td>
+		<td><input type="button"  value="买票" class="maipiao1" onclick=maipiao()/></td>
+	</tr>
+	</tbody>
+</table>
+</div>
+<script>
+        $("#riqi1").click(function(){
+        	$("#riqi1").css("background-color","red");
+        });
+</script>
+<script>
+$(function() {
+	
+	doLoadUI("maipiao", "doMaiPiaoUI");
+
+})
+	function maipiao(obj){
+    		var url="doGouPiao"
+    		var city=document.getElementById("choseCity").value
+    		//alert("city:"+city)
+    		var params={
+    			"name":$(".dym").html(),
+    			"city":city
+    			}
+					$.post(url,params,function(result){
+						if (result.state==1) {
+							doSetTableBodyRow(result.data);
+						}else {
+							alert("获取失败")
+						}
+					})
+			var riqi = null;
+				for(var i=0;i<5;i++){
+					var riqiclass=$("#"+i).attr("class");
+					if(riqiclass=="flag riqi-i end"){
+						riqi=$("#"+i).attr("value");
+					}
+				}
+				$("#dyriqi").empty();
+				$("#dyriqi").append(riqi)
+				var d222=$(obj).attr("id");
+				var yingyuanMC=$("."+d222).html();
+				$("#dyyyuan").empty();
+				$("#dyyyuan").append(yingyuanMC)
+			} 
+ 			  	function doSetTableBodyRow(obc){
+					  console.log("obc="+obc);
+						//$("#dyyyuan").append()
+				   //1.获取tbody对象,并清空
+				   var tBody=$("#tbodyId1");
+				   tBody.empty();
+				   //2.将记录records进行呈现
+				   //2.1迭代记录集
+				   for(var i=0;i<obc.length;i++){
+					   //2.2 创建tr对象
+					   var tr=$("<tr></tr>");
+					   //2.3 创建多个td对象
+					   var tds=doCreateTd(obc[i]);
+					   //2.4 将td对象追加到tr中
+					   tr.append(tds);
+					   //2.5 将tr追加到tbody中
+					   tBody.append(tr);
+				   }
+			   }
+ 			  	var youdiantian=0
+				  function doCreateTd(data){
+ 			  		youdiantian++;
+					  var tds="<td class='"+youdiantian+"'>"+data.fangYingShiJian+"</td>"+
+					 		  "<td class='"+youdiantian+0+"'>"+data.yingTingMingCheng+"</td>"+
+					 		  "<td class='"+0+youdiantian+"'>"+data.jiaGe+"</td>"+
+					 		  "<td>"+"<input id='"+youdiantian+"' type='button' value='选择座位' onclick='miaofu(this)'/>"+"</td>";
+						  
+						  return tds;
+				  }
+		function miaofu(dmj){
+			var url="doSeatUI"
+			$("#goupiaos").load(url);
+			var dmjid=$(dmj).attr("id");
+			var chulian=$("."+dmjid).html();
+			var qianqi=$("."+dmjid+0).html();
+			var xiaofengshan=$("."+0+dmjid).html();
+			var urls="doseat";
+			$("#dybfsj").empty();
+			$("#dybfsj").append(chulian);
+			$("#dyyt").empty();
+			$("#dyyt").append(qianqi)
+			$("#price").empty();
+			$("#price").append(xiaofengshan)
+			var params={
+				"yymc":qianqi
+			}
+			$.post(urls,params,function(result){
+				if(result.state==1){
+					chunniunai(result.data);
+				}else{
+					alert(result.message)
+				}
+			})
+			function chunniunai(obcj){
+				var xianggujiang=obcj.paiShu;
+				var shubiao=obcj.hangShu;
+				$("#dyyyuan").attr("class",xianggujiang);
+				$("#dybfsj").attr("class",shubiao);
+			}
+		}
+</script>
+<style>
+	.riqi{
+		font-size:20px;
+	}
+	
+	
+</style>
+
+
+
+
+
+
+
+
+
+
+

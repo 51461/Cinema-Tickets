@@ -1,0 +1,148 @@
+<!doctype html>
+<html>
+	<head>
+		<title>选座</title>
+		<link rel="stylesheet" type="text/css" href="css/component.css" />
+		<style>	
+			.row__seat{
+				font-size:12px;
+				text-align: center;
+			}
+			.plan{
+/* 				background: #DDD url() repeat scroll top; */
+			}
+			.row{
+				width:615px;
+				/*border: 1px solid yellow;*/
+				margin: 0 auto;
+			}
+		</style>
+	</head>
+	<script src ="js/jquery-1.8.3.min.js"></script>
+	<script>
+		var cols=$("#dyyyuan").attr("class");
+		console.log("cols="+cols)
+		var rows=$("#dybfsj").attr("class");
+		var changciID=null;
+		console.log("rows="+rows)
+		$(function(){
+			for (var r=0;r<rows;r++) {
+				debugger
+				$(".rows--mini").append("<div id='rows" + r + "' class='row' ></div>");
+			}
+			for (var i =0; i <rows; i++) {
+				var rowd="#rows"+i;
+				for (var j = 0; j <cols; j++) {
+					$(rowd).append("<div id='" +((j+1)+(i*cols))+ "' class='row__seat tooltip' data-tooltip='" +(i+1)+"&#8722;"+(j+1)+"' onclick='mychange(" +((j+1)+(i*cols))+ ")'>"+(i+1)+"-"+(j+1)+"</div>")
+				}
+			}
+			var url="doFindDD"
+			var params={
+				"yynm":$("#dyyyuan").html(),
+				"ytnm":$("#dyyt").html(),
+				"sj":$("#dyriqi").html(),
+				"fysj":$("#dybfsj").html()
+			}
+			console.log(params)
+			$.post(url,params,function(result){
+				if(result.state==1){
+					console.log(result.data)
+					yishouchu(result.data)
+				}
+			}) 
+			function yishouchu(objc){
+				changciID=objc[0].changCiID;
+				console.log("changciID"+changciID)
+				for(var i=0;i<objc.length;i++){
+					var pai=objc[i].zuoWeiPaiShu;
+					var lie=objc[i].zuoWeiLieShu;
+					var zuowei=pai+"-"+lie;
+					console.log(zuowei)
+					var gbk=cols*rows;
+					for(var j=0;j<gbk;j++){
+						var tip=$("#"+j).html();
+						if(tip==zuowei){
+							$("#"+j).attr("class","row__seat row__seat--reserved")
+						}
+					}
+				}
+			}
+		})
+		function zf(){
+			var r=confirm("确认支付")
+			if (r==true) {
+				var flag=1;
+				var ids=new Array();
+				for (var i = 1 ; i <=1000; i++) {
+					var s="#"+i;
+					var cls=$(s).attr("class")
+					if (cls=="row__seat tooltip row__seat--selected") {
+						var j=$(s).html();
+						//var j=$(s).text();
+						ids.push(j)
+						//ids.push(i)
+						$(s).attr("class","row__seat row__seat--reserved");
+						flag=2;
+						// console.log(flag)
+					}else{
+					}
+					// console.log(flag)
+				}
+				if (flag==1) {
+					alert("请先至少选择一个座位")
+					return;
+				}
+				var url="pay/doPay";
+				var params={
+						"ids":ids,
+						"changciid":changciID
+						};
+				$.post(url,params,function(result){
+					debugger
+					console.log(params)
+					if(result.state==1){
+						debugger
+						//var palce=result.data;
+						//$("#fkje").append(palce)
+						window.location.href="pay/doPayUI?palce="+result.data+"&ids="+ids+"&changciid="+changciID+"&yhm="+yhm
+					}
+				})
+				//alert("支付成功,可在订单记录查看详情")
+				//window.location.href="zhifuchenggong.html"
+			}else{
+			}
+		}
+		function mychange(id){
+			var str="#"+id;
+			var s=$(str).attr("data-tooltip");
+			var f=$(str).attr("class")
+			if (f=="row__seat row__seat--reserved") {
+				return;
+			}
+			if (f!="row__seat tooltip row__seat--selected") {
+				$(str).attr("class","row__seat tooltip row__seat--selected")
+			}else{
+				$(str).attr("class","row__seat tooltip")
+			}
+		}
+		
+	</script>
+	<body>
+		<div class="plan">
+			<div id="xinxi" style="padding-left: 30%">
+				<span id="yymc"></span>
+				<span id="ytmc"></span>
+				<span id="dymc"></span>
+				<span id="fysj"></span>
+			</div>
+<!-- 			<h3 class="plan__title">座位选择</h3>
+ -->			<div class="rows rows--mini" ></div>
+			<ul class="legend">
+				<li class="legend__item legend__item--free">空座</li>
+				<li class="legend__item legend__item--reserved">已售</li>
+				<li class="legend__item legend__item--selected">选中</li>
+			</ul>
+			<button onclick="zf()" class="action action--buy" id="cp">出票</button>	
+		</div><!-- /plan -->	
+	</body>
+</html>

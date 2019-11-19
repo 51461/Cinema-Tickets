@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=9,chrome=1"/>
+	<title>付款方式</title>
+	<style type="text/css">
+		/* CSS Document */
+		body,ul,ol,li,p,h1,h2,h3,h4,h5,h6,form,table,td,img,div,dl,dt,dd,input{margin:0;padding:0; box-sizing: border-box}
+		body{font-size:12px;}
+		img{border:none;}
+		li{list-style:none;}
+		input,select,textarea{outline:none;}
+		textarea{resize:none;}
+		a{text-decoration:none;}
+		/*清浮动*/
+		.clearfix:after{content:"";display:block;clear:both;}
+		.clearfix{zoom:1;}
+ 
+		/* 取消a标签点击后的虚线框 */
+		a {outline: none;}
+		a:active {star:expression(this.onFocus=this.blur());}
+		input[type="text"]{
+			outline: none;
+		}
+		/*付款方式*/
+		.payWrap{
+			width:950px;
+			min-height: 560px;
+			background: #FFFFFF;
+			margin: 0 auto;
+		}
+		.payHeader{
+			height: 56px;
+			line-height: 56px;
+			border-bottom: 1px solid #CCCCCC;
+			padding: 0 40px;
+		}
+ 
+		.payWrap .fontsize{
+			color:#d81e06 ;
+			font-size: 18px;
+			margin:0 5px;
+		}
+		.payContent{
+			padding:10px 20px;
+		}
+		.unionpayList{
+			width: 100%;
+			height: 40px;
+			line-height: 40px;
+			margin: 5px 0;
+			position: relative;
+			border: 2px solid #FFFFFF;
+		}
+		.unionpayList:hover{
+			cursor: pointer;
+			background: #f1f4fa;
+		}
+		.unionPrice{
+			position: absolute;
+			top: 0;
+			right: 20px;
+		}
+		.unionpay1{
+			padding: 0 20px 0 62px;
+			background: url("images/unionpay1.png") 20px center no-repeat;
+		}
+		.unionpay2{
+			padding: 0 20px 0 62px;
+			background: url("images/unionpay2.png") 20px center no-repeat;
+		}
+		.activeBtn{
+			width: 100%;
+			height: 40px;
+			line-height: 40px;
+			border: 2px solid #7a97cc;
+		}
+		.payBorder{
+			width: 100%;
+			border-top: 1px solid #f2f2f2;
+			margin-top: 30px;
+		}
+		.payBut{
+			display: block;
+			width: 150px;
+			height: 32px;
+			line-height: 32px;
+			text-align: center;
+			background: #0169c6!important;
+			color: #FFFFFF!important;
+			float: left!important;
+			margin: 20px 0;
+		}
+		.wait{
+			display:block;
+			width:300px;
+			height: 32px;
+			margin: 30px 0 0 160px;
+			text-decoration: underline!important;
+		}
+	</style>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.4.1.js"></script>
+</head>
+<body>
+<div class="payWrap">
+	<div class="payHeader clearfix">
+		<div class="fl">订单编号：<span id="ddbh"></span></div>
+	</div>
+	<section class="payContent">
+		<div class="unionpayList activeBtn" id="1" onclick="zhifu(this)">
+			<span class=" unionpay1" >余额支付</span>
+			<div class=" unionPrice">支付<span id="zf1" class="fontsize"></span>元</div>
+		</div>
+		<div class="unionpayList" id="2" onclick="zhifu(this)">
+			<span class="unionpay2" >支付宝支付</span>
+			<div class="unionPrice ">支付<span id="zf2" class="fontsize"></span>元</div>
+		</div>
+	</section>
+</div>
+<script>
+	$(".unionpayList").click(function(){
+		$(".unionpayList").removeClass("activeBtn");
+		$(this).addClass("activeBtn")
+	})
+	function GetQueryString(name)
+	{
+	     var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+	     var r = window.location.search.substr(1).match(reg);
+	     if(r!=null)return  unescape(r[2]); return null;
+	}
+	var ids=GetQueryString("ids")
+	var changciid=GetQueryString("changciid")
+	var yhm=GetQueryString("yhm")
+	function GetDateNow() {
+		var vNow = new Date();
+		var sNow = "";
+		sNow += String(vNow.getFullYear());
+		sNow += String(vNow.getMonth() + 1);
+		sNow += String(vNow.getDate());
+		sNow += String(vNow.getHours());
+		sNow += String(vNow.getMinutes());
+		sNow += String(vNow.getSeconds());
+		sNow += String(vNow.getMilliseconds());
+		var palce=GetQueryString("palce")
+		$("#ddbh").append(sNow)
+		$("#zf1").append(palce)
+		$("#zf2").append(palce)
+	}
+	function zhifu(ob){
+		var id=$(ob).attr("id");
+		var pcs=GetQueryString("palce")
+		if(id==1){
+			var url="/pay/doYuE"
+		}else{
+			window.location.href="http://172.162.18.55:8080/?palce="+pcs+"&ids="+ids+"&changciid="+changciid+"&yhm="+yhm;
+			return;
+		}
+		var pc =GetQueryString("palce");
+		var params={
+				"palce":pc,
+				"ids":ids,
+				"changciid":changciid,
+				"yhm":yhm
+				}
+		$.post(url,params,function(result){
+			if(result.state==1){
+				alert("支付成功")
+				window.location.herf="http://172.162.18.55:8080/?yhm="+yhm
+			}else{
+				alert(result.message)
+			}
+		})
+	}
+	GetDateNow();
+</script>
+</body>
+</html>

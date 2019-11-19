@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.java98k.alipay.dao.GrxxDao">
+	<select id="findByYHID" parameterType="String"
+		resultType="com.java98k.alipay.vo.GrxxPojo">
+		select 
+		y.yinYuanMingCheng,zw.zuoWeiPaiShu,zw.zuoWeiLieShu,yh.yongHuMing,yh.yongHuDengJi,yh.yuE,c.shiJian,d.dianYingMingCheng,d.shiChang
+		from dianyingbiao d,changcibiao c,yonghubiao yh,zhangdanbiao
+		z,zuoweibiao zw,yingtingbiao y where z.changCiID=c.id and
+		z.yongHuID=yh.yongHuID and c.dianYingID=d.dianYingID and
+		y.yingTingID=c.yingTingID and c.id=zw.changCiID and
+		zw.zuoWeiBiaoID=z.zuoWeiBiaoID and yh.yongHuMing=#{id}
+	</select>
+</mapper>

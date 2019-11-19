@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>注册界面</title>
+<link rel="stylesheet" href="css/reset.css" />
+<link rel="stylesheet" href="css/common.css" />
+<link rel="stylesheet" href="css/font-awesome.min.css" />
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript">
+	var yzm = null;
+	$(function() {
+		
+		//获取短信验证码
+		var validCode = true;
+		$(".msgs").click(function() {
+			var phone = $("#sjh").val()
+			var time = 60;
+			var code = $(this);
+			if (validCode) {
+				validCode = false;
+				code.addClass("msgs1");
+				var t = setInterval(function() {
+					time--;
+					code.html(time + "秒");
+					if (time == 0) {
+						clearInterval(t);
+						code.html("重新获取");
+						validCode = true;
+						code.removeClass("msgs1");
+					}
+				}, 1000)
+			}
+			var url = "doYanZheng";
+			var params = {
+				"phone" : phone
+			}
+			$.post(url, params, function(result) {
+				if (result.state == 1) {
+					yzm = result.message;
+				}else{
+					alert(result.message)
+				}
+			})
+		})
+	})
+</script>
+<style type="text/css">
+#yanzheng {
+	width: 150px;
+	height: 30px;
+	margin: 5px;
+	border: none;
+	font-family: "微软雅黑";
+	font-size: 15px;
+	color: #666;
+}
+</style>
+</head>
+<body>
+	<div class="wrap login_wrap">
+		<div class="content">
+
+			<!-- <div class="logo"></div> -->
+
+			<div class="login_box">
+
+				<div class="login_form">
+					<div class="login_title">注册</div>
+					<form action="#" method="post">
+
+						<div class="form_text_ipt">
+							<input id="yhm" name="username" type="text" placeholder="用户名">
+						</div>
+						<div class="ececk_warning">
+							<span>手机号/邮箱不能为空</span>
+						</div>
+						<div class="form_text_ipt">
+							<input id="mm" name="password" type="password" placeholder="密码">
+						</div>
+						<div class="ececk_warning">
+							<span>密码不能为空</span>
+						</div>
+						<div class="form_text_ipt">
+							<input id="mmm" onblur="biji()" name="password" type="password" placeholder="密码">
+						</div>
+						<div class="ececk_warning">
+							<span>确认密码不能为空</span>
+						</div>
+						<div class="form_text_ipt">
+							<input id="sjh" name="repassword" type="text"
+								placeholder="请输入手机号">
+						</div>
+						<div class="ececk_warning">
+							<span>手机号不能为空</span>
+						</div>
+						<div class="form_text_ipt" style="">
+							<input id="yanzheng" name="code" type="text" placeholder="验证码">
+							<span class="msgs">获取短信验证码</span>
+						</div>
+						<div class="ececk_warning">
+							<span>验证码不能为空</span>
+						</div>
+
+						<div class="form_btn">
+							<button type="button" onclick="zhuce()">注册</button>
+						</div>
+						<div class="form_reg_btn">
+							<span>已有帐号？</span><a href="index.html">马上登录</a>
+						</div>
+					</form>
+					<div class="other_login">
+						<div class="left other_left">
+							<span>其它登录方式</span>
+						</div>
+						<div class="right other_right">
+							<a href="#"><i class="fa fa-qq fa-2x"></i></a> <a href="#"><i
+								class="fa fa-weixin fa-2x"></i></a> <a href="#"><i
+								class="fa fa-weibo fa-2x"></i></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/common.js"></script>
+	<div style="text-align: center;">
+		<p></p>
+	</div>
+	<script type="text/javascript">
+		function biji(){
+			var np=$("#mm").val();
+			var nps=$("#mmm").val();
+			if (np!=nps) {
+				alert("两次密码不一致")
+				return;
+			}
+		}
+		function zhuce() {
+			biji();
+			var yyy=$("#yanzheng").val()
+			console.log(yzm)
+			if (yyy==yzm) {
+				alert("注册成功");
+			}else {
+				alert("验证码错误");
+				return;
+			}
+			var url="doZhuCe"
+			var params={
+					"yongHuMing":$("#yhm").val(),
+					"miMa":$("#mm").val(),
+					"phone":$("#sjh").val()
+			}
+			console.log(params)
+			$.post(url,params,function(result){
+				if(result.state==1){
+					location.href="doLoginUI?t="+Math.random();
+				  }else{
+					alert(result.message); 
+				  }
+			})
+		}
+	</script>
+
+</body>
+</html>

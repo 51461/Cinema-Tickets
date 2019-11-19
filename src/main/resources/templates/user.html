@@ -1,0 +1,227 @@
+<div id="container">
+	<div id="yh">
+		<table>
+			<tr>
+				<td>用户名:</td>
+				<td id="yhm"></td>
+				<td rowspan="3">
+					<p>
+						<input type="button" value="升级会员"
+							style="width: 260px; height: 40px; letter-spacing: 10px; font-size: large;"
+							onclick="document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'" />
+					</p>
+					<p><input type="button" value="定位" style="width: 260px; height: 40px; letter-spacing: 10px; font-size: large;" class="addressButton" /></p>
+					<div id="light" class="white_content">
+						<!-- 弹框 -->
+						<div id="tk" title="升级会员">
+							<form action="doDianYing2">
+								<font style="font-size: 25px">充值金额:</font> <input type="text"
+									name="je" id="je" />
+							</form>
+							<input id="qd" type="button" value="确定"
+								style="width: 260px; height: 40px; letter-spacing: 10px; font-size: large;"
+								onclick="qd(this)" /> <input type="button" value="取消"
+								style="width: 260px; height: 40px; letter-spacing: 10px; font-size: large;"
+								onclick="fh(this)" />
+						</div>
+					</div>
+					<div id="fade" class="black_overlay"></div>
+				</td>
+			</tr>
+			<tr>
+				<td>会员等级:</td>
+				<td id="dj">加载中...</td>
+				<!-- <td></td>
+				<td></td>
+				<td></td> -->
+			</tr>
+			<tr>
+				<td>剩余钱(元):</td>
+				<td id="q">加载中...</td>
+			</tr>
+		</table>
+	</div>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<p style="font-size: 25px">我的订单:</p>
+	<div>
+		<div class="lishi">
+			<input class="flag button1-1" type="button" value="已看电影"
+				onclick="fun(this)" /> <input class="flag button2-1" type="button"
+				value="未看电影" onclick="fun(this)" />
+		</div>
+		<table border="0px" class="dy">
+			<tr>
+				<th>影片</th>
+				<th>时间</th>
+				<th>影院</th>
+				<th>座位</th>
+			</tr>
+
+
+			<tr align="center">
+				<td id="yp0"></td>
+				<td id="sj0"></td>
+				<td id="yy0"></td>
+				<td id="zw0"></td>
+			</tr>
+			<tr align="center">
+				<td id="yp1"></td>
+				<td id="sj1"></td>
+				<td id="yy1"></td>
+				<td id="zw1"></td>
+			</tr>
+
+			<tr align="center">
+				<td id="yp2"></td>
+				<td id="sj2"></td>
+				<td id="yy2"></td>
+				<td id="zw2"></td>
+			</tr>
+			<tr align="center">
+				<td id="yp3"></td>
+				<td id="sj3"></td>
+				<td id="yy3"></td>
+				<td id="zw3"></td>
+			</tr>
+			<tr align="center">
+				<td id="yp4"></td>
+				<td id="sj4"></td>
+				<td id="yy4"></td>
+				<td id="zw4"></td>
+			</tr>
+			<tr align="center">
+				<td id="yp5"></td>
+				<td id="sj5"></td>
+				<td id="y5"></td>
+				<td id="z5"></td>
+			</tr>
+		</table>
+	</div>
+	<br> <br> <br>
+	<div id="sy">
+		<input class="sy" type="button" value="返回首页" onclick="fh()" />
+	</div>
+	<div id="footer"></div>
+	<div>
+		<script type="text/javascript">
+		function fh(ob){
+			location.replace("doIndexUI?name="+yhm)
+		}
+		function qd(ob){
+			debugger
+			var a=document.getElementById("je").value;
+			var b=document.getElementById("q").innerHTML;
+			var url="doChongQian";
+			var params={
+					"yhm":yhm,
+					"yuE":b,
+					"chongQian":a
+			}
+			$.post(url,params,function(result){
+				alert(result.state)
+			  if(result.state==1){
+				  alert("支付成功");
+			  }else{
+				  alert("支付失败");
+				  return;
+			  }
+			  });
+			window.location.href="http://172.162.18.55:8080/?palce="+a; 
+		}
+</script>
+		<script>/* 选日期 */
+	$(function () {
+		//注册定位按钮和获取IP地址
+		doFindIp();
+    	$(".addressButton").click(goAnother)
+	    //加载事件
+	        var collection = $(".flag");
+	        $.each(collection, function () {
+	            $(this).addClass("start");
+	        });
+	    });
+	    //单击事件
+	 function fun(dom) {
+	        var collection = $(".flag");
+	        $.each(collection, function () {
+	            $(this).removeClass("end");
+	            $(this).addClass("start");
+	        });
+	        $(dom).removeClass("start");
+	        $(dom).addClass("end");
+	    }
+	 function doFindIp(){
+			var url="/doFindIp"	
+			$.getJSON(url,function(result){
+             if(result.state==1){
+					console.log(result.data.address)
+					$(".addressButton").data("sysIpVo",result.data)
+                 $(".addressButton").html("地址:"+result.data.address)
+             }else{
+                alert(result.message)
+             }
+          })
+		}
+		function goAnother(){
+			 var btn=$(this);
+          var sysIpVo=btn.data("sysIpVo")
+          var ip=sysIpVo.ip
+          window.open("LaoTieMap.html?ip="+ip);
+          //window.location.href="LaoTieMap.html?ip="+ip
+		}
+</script>
+		<style>
+.black_overlay {
+	display: none;
+	position: absolute;
+	top: 0%;
+	left: 0%;
+	width: 100%;
+	height: 100%;
+	background-color: black;
+	z-index: 1001;
+	-moz-opacity: 0.8;
+	opacity: .80;
+	filter: alpha(opacity = 88);
+}
+
+.white_content {
+	display: none;
+	position: absolute;
+	top: 25%;
+	left: 25%;
+	width: 55%;
+	height: 55%;
+	padding: 20px;
+	border: 10px solid orange;
+	background-color: white;
+	z-index: 1002;
+	overflow: auto;
+}
+
+.button1-1:hover, .button1-2:hover {
+	color: #fff;
+	border-color: #b1b0b0;
+	background: #b1b0b0;
+	border: none;
+}
+
+.start {
+	cursor: pointer;
+}
+
+.end {
+	cursor: pointer;
+	color: #fff;
+	background: red;
+	border: none;
+}
+</style>

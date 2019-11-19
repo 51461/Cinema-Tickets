@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title>北京</title>
+<link rel="stylesheet" href="../css/index.css" />
+<link href="../css/dianying.css" type="text/css" rel="stylesheet" />
+</head>
+<body background="../images/dl6.png">
+	<div id="top" class="top">
+		<div class="logo">
+			<img src="../images/first.png" width="100px" height="100px" />
+		</div>
+		<div>
+			<font id="text" size="7">兄弟盟电影院</font>
+		</div>
+		<div>
+			<ul class="ul">
+				
+				<li><a href="#"><input class="button1" type="button"
+						value="首页" /></a></li>
+				
+				<li class="input-group-btn"><input type="text" id="searchName"
+					placeholder="根据电影名，演员名搜索"
+					style="font-size: x-large; padding-bottom: 5px;" /> <input
+					type="button" value="搜索" class="souSou"
+					style="font-size: x-large; padding-bottom: 5px;" /></li>
+			</ul>
+		</div>
+	</div>
+	<p style="font-size: 30px">电影列表</p>
+	<div id="msnzs1">
+
+		<table id="tbodyId">
+			<tbody>
+				<tr>
+					<td colspan="7">数据加载中...</td>
+				</tr>
+			</tbody>
+		</table>
+
+	</div>
+	<script src="../js/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript">
+		function GetQueryName(name) {
+			var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+			var r = window.location.search.substr(1).match(reg);
+			if (r != null) {
+				return decodeURIComponent(r[2])
+			}
+			return null;
+		}
+		function doPingLun(jsonResult) {
+
+			// 			var it = jsonResult.entrySet().iterator();
+			// 	        while (it.hasNext()) {
+			//  	            var entity = it.next();            
+			// 	            alert("key: "+entity.getKey());
+			// 	            alert("value: "+entity.getValue());
+			// 	        }
+
+			if (jsonResult.state == 1) {
+				doPingLun2(jsonResult.data)
+			}
+		}
+
+		function doPingLun2(result) {
+			//alert(result)
+			var tBody = $("#tbodyId");
+			tBody.empty();
+			//2.将记录records进行呈现
+			//2.1迭代记录集
+			for (var i = 0; i < result.length; i++) {
+				//2.2 创建tr对象
+				var tr = $("<tr></tr>");
+				//2.3 创建多个td对象
+				var tds = dopl(result[i]);
+				//2.4 将td对象追加到tr中
+				tr.append(tds);
+				//2.5 将tr追加到tbody中
+				tBody.append(tr);
+			}
+		}
+
+		function dopl(data) {
+			var date = new Date(data.shiJian);
+			var year = date.getFullYear()
+			var month = date.getMonth() + 1
+			var day = date.getDate()
+
+			var tds = "<tr>" + "<td class='ping1' >"
+					+ "<hr color='black' style='width:1000px'/>"
+					+ data.name
+					+ "</td>"
+					+ "</tr>"
+					+ "<tr>"
+					+ "<td class='ping2' >给作品打了"
+					+ data.pingFen
+					+ "分</td>"
+					+ "</tr>"
+					+ "<tr>"
+					+ "<td class='ping3' >"
+					+ data.pingLun
+					+ "</td>"
+					+ "</tr>"
+					+ "<tr>"
+					+ "<td class='ping2' >"
+					+ year
+					+ "/" + month + "/" + day + "</td>" + "</tr>";
+
+			return tds;
+		}
+
+		
+		
+		$(function(){
+			var url = "doSou";
+			var name = GetQueryName("name")
+			var params = {
+				"name" : name
+			}
+			//alert(name)
+			$.post(url, params, function(jsonResult) {
+				dosetresult(jsonResult);
+			})
+		})
+
+		function dosetresult(result) {
+
+			if (result.state == 1) {
+				dosetjsonResult(result)
+			}
+		}
+		function dosetjsonResult(result1) {
+			var result=result1.data
+			
+			//1.获取tbody对象,并清空
+			var tBody = $("#tbodyId");
+			tBody.empty();
+			if(result.length<=0){
+				//alert("查不到响应的电影")
+				tBody.append("查不到响应的电影");
+				return
+			}
+			
+			//2.将记录records进行呈现
+			//2.1迭代记录集
+			for (var i = 0; i < result.length; i++) {
+				//2.2 创建tr对象
+				var tr = $("<tr></tr>");
+				//2.3 创建多个td对象
+				var tds = dodl(result[i]);
+				//2.4 将td对象追加到tr中
+				tr.append(tds);
+				//2.5 将tr追加到tbody中
+				tBody.append(tr);
+				
+			}
+			
+			
+			$(function() {
+				doLoadUI("big", "../doDianYingUI");
+			})
+			function doLoadUI(id, url) {
+				
+				$("." + id).click(function() {//事件处理函数
+					
+					$("#msnzs1").load(url);
+				//load函数为jQuery中的一个异步函数
+				})
+			}
+		}
+		
+		
+		
+		
+		function dodl(data) {
+			
+			var tds = "<tr>" + "<td rowspan='6'><img class='big' id='"
+					+ data.dianYingID
+					+ "' src=../"
+					+ data.dianYingTuPian
+					+ " width='260px' height='450px'onclick='dianji3(this)' /></td>"
+					+ "</tr>" + "<tr>" + "<td></td><td><font class='text'>电影名："
+					+ data.dianYingMingCheng
+					+ "</font></td><td class='dym'></td>" + "</tr>" + "<tr>"
+					+ "<td></td><td><font class='text'>上映时间：" + data.shiJian
+					+ "</font></td><td class='sysh'></td>" + "</tr>" + "<tr>"
+					+ "<td></td><td><font class='text'>电影时长：" + data.shiChang
+					+ "</font></td><td class='sc'></td>" + "</tr>" + "<tr>"
+					+ "<td></td><td><font class='text'>电影综合评价："
+					+ data.dianYingZongHePingFen
+					+ "</font></td><td class='pf'></td>" + "</tr>" +
+					//"<tr>"+"<td></td><td><font class='text'>剧情介绍："+data.dianYingJieShao+"</font></td><td class='pf'></td>"+"</tr>"+
+					"<tr>" + "<td></td><td><font class='text'>电影类型："
+					+ data.dianYingLeiXing + "</font></td><td class='pf'></td>"
+					+ "</tr>" + "<tr><td height='50px'> <td/></tr>";
+			return tds;
+		}
+		//$(function() {
+		//	$(".input-group-btn").on("click", ".souSou", doGetObjects)
+		//})
+		function doGetObjects() {
+			var name = $("#searchName").val();
+			var url = "doSouSuo";
+			//alert(name);
+			var params = {
+				"name" : name
+			}
+			$.post(url, params, function(result) {
+				
+				if (result.state) {
+					window.location.href = "doSouSuoUI?name=" + result.message
+				}
+			})
+		}
+		
+		
+		function dianji3(ob) {
+			var id = $(ob).attr("id");
+			var params = {
+				id : id
+			};
+			var url = "../doDianYing";
+			$.post(url, params, function(jsonResult) {
+				dosetresult2(jsonResult);
+			})
+			var url2 = "../pinglun/showPingLun";
+			$.post(url2, params, function(jsonResult) {
+
+				doPingLun(jsonResult);
+
+			})
+		}
+		function dosetresult2(jsonResult) {
+			
+			if (jsonResult.state == 1) {
+				dosetjsonResult2(jsonResult.data)
+			}
+			
+		}
+		function dosetjsonResult2(result) {
+			
+			
+			$(".dym").empty();
+			$(".dym").append(result[1].dianYingMingCheng)
+			$(".sysh").empty();
+			$(".sysh").append(result[1].shiJian)
+			$(".sc").empty();
+			$(".sc").append(result[1].shiChang)
+			$(".pf").empty();
+			$(".pf").append(result[1].dianYingZongHePingFen)
+			$(".jqjj").empty();
+			$(".jqjj").append(result[1].dianYingJieShao)
+			$(".dytp").attr("src", "../"+result[1].dianYingTuPian)
+			for (var i = 0, j = 1, k = 5; i < result.length; i++, j++, k++) {
+				$(".yy" + j).attr("src", "../"+result[i].yanYuanDaoYanTuPian)
+				$(".yy" + k).attr("value", result[i].mingZi)
+				$("#yy" + j).attr("href",
+						"https://baike.baidu.com/item/" + result[i].mingZi)
+				$("#yy" + k).attr("href",
+						"https://baike.baidu.com/item/" + result[i].mingZi)
+			}
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.java98k.alipay.dao.YingTingDao">
+	<select id="findByYingTingID" resultType="com.java98k.alipay.vo.YingTingPojo">
+		select * from yingTingBiao 
+		where yingTingID=#{ID}
+	</select>
+	<select id="findByYingTingName" resultType="com.java98k.alipay.vo.YingTingPojo">
+		select * from yingTingBiao 
+		where yingTingMingCheng = #{yingTingname}
+	</select>
+</mapper>

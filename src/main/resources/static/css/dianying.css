@@ -1,0 +1,103 @@
+#main{
+	width:1920px;
+	height:1080px;
+	MARGIN-RIGHT:auto;
+	MARGIN-LEFT:auto;
+}
+body {
+	overflow: auto;
+	padding-left: 155px;
+	padding-right: 155px;
+}
+
+.top {
+	background-color: #FEC0D7;
+	text-align: center;
+	height: 100px;
+	border-style:outset;
+	border-color:white;
+}
+
+.logo {
+	float: left;
+}
+
+#logo {
+	width: 20px;
+	height: 20px;
+	padding-bottom: 5px;
+	padding-top: 5px;
+}
+
+.button1 {
+	font-size: x-large;
+	padding-bottom: 5px;
+	background-color: #DFDFDF;
+	color: black;
+	border: none;
+}
+
+.button1:hover {
+	background-color: black;
+	color: white;
+}
+
+
+.ul li {
+	display: inline-block;
+	margin: 0 5%;
+	font-size: 50px;
+}
+
+#text {
+	float: left;
+	padding-bottom: 12px;
+	padding-top: 12px;
+}
+.text{
+	font-size: 30px;
+	padding: 100px;
+}
+.button2{
+	padding-left: 100px;
+}
+.button2 a input:hover{
+	background-color:red;
+}
+.jianjie{
+	margin:0 auto;
+	width: 1400px;
+	
+	
+}
+.photo{
+	padding-left: 90px;
+}
+.photo ul li{
+	list-style-type: none;
+	float: left;
+	margin: 0 3%;
+}
+.yanyuan{
+	padding-left: 90px;
+}
+.yanyuan ul li{
+	list-style-type: none;
+	float: left;
+	margin: 0 7%;
+	letter-spacing: 10px;
+	font-size: 20px;
+}
+#pingjia{
+	padding-left: 155px;
+}
+#pingjia a{
+	text-decoration: none;
+}
+.dym,.sysh,.sc,.pf{
+	font-size: 20px;
+}
+.jqjj{
+	font-size:25px;	
+	text-indent: 40px;
+}

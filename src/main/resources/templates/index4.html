@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	button {
+	width:250px;
+	height: 100px;
+}
+</style>
+</head>
+<body>
+	<h1 id="nihao"></h1>
+	<button onclick="showUserInformation(this)">用户信息</button>
+	<button>增加电影</button>
+	<button>删除电影</button>
+	<button>修改电影</button>
+	<button>查询电影</button>
+<!-- 	<div id="yhid"></div> -->
+<!-- 	<div id="yhmc"></div> -->
+<!-- 	<div id="yhma"></div> -->
+<!-- 	<div id="yhdj"></div> -->
+<!-- 	<div id="ye"></div> -->
+	<table>
+		<tbody id="kongtiao">
+			<tr>
+				<td>数据正在加载中</td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+<script src="js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript">
+function showUserInformation(ob){
+	var url="doFindAll";
+	$.post(url,function(jsonResult) {
+		d(jsonResult);
+	})
+}
+function d(jsonResult){
+	//alert("abc");
+	if(jsonResult.state==1){
+		//alert("bbbbb");
+		/*for(var i=0;i<jsonResult.data.length;i++){
+			document.getElementById("yhid"+i).innerHTML="用户id:"+jsonResult.data[i].yongHuID+"&nbsp;";
+			document.getElementById("yhmc"+i).innerHTML="用户名称:"+jsonResult.data[i].yongHuMing+"&nbsp;";
+			document.getElementById("yhma"+i).innerHTML="用户密码:"+jsonResult.data[i].miMa+"&nbsp;";
+			document.getElementById("yhdj"+i).innerHTML="会员等级:"+jsonResult.data[i].yongHuDengJi+"&nbsp;";
+			document.getElementById("ye"+i).innerHTML="余额:"+jsonResult.data[i].yuE+"<br>";
+			//alert(j.data[i].yongHuID)
+			//alert("************");
+		}*/
+		doyizi(jsonResult.data);
+	}
+	}
+	function doyizi(result){
+		var tBody=$("#kongtiao");
+		tBody.empty();
+		for(var i=0;i<result.length;i++){
+			
+			var tr=$("<tr></tr>");
+			//alert(jsonResult.data[i].yongHuID);
+			   //2.3 创建多个td对象
+			   var tds=dofengshan(result[i]);
+			   //2.4 将td对象追加到tr中
+			   
+			   tr.append(tds);
+			   
+			   //2.5 将tr追加到tbody中
+			   tBody.append(tr);
+		
+		   
+		}
+	}
+	function dofengshan(data){
+		var tds="<td>用户id:"+data.yongHuID+"</td>"+"<td>-----</td>"+
+		   "<td>用户名称:"+data.yongHuMing+"</td>"+"<td>-----</td>"+
+		   "<td>用户密码:"+data.miMa+"</td>"+"<td>-----</td>"+
+		   "<td>会员等级:"+data.yongHuDengJi+"</td>"+"<td>-----</td>"+
+		   "<td>余额:"+data.yuE+"</td>";
+		   return tds;
+	}
+		
+		
+		
+		
+		
+		
+	
+
+function oneValues(){
+	var result;
+	var url=window.location.search; //获取url中"?"符后的字串  
+	if(url.indexOf("?")!=-1){
+	result = url.substr(url.indexOf("=")+1);
+	}
+	console.log(result);
+	return result;
+	}
+document.getElementById("nihao").innerHTML="你好!"+oneValues();
+</script>
+</html>

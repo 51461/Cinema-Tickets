@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.java98k.alipay.dao.LoginServiceDao">
+	<select id="check" resultType="String" >
+ 		select y.guanLiYuanMiMa
+ 		from guanliyuan y
+ 		where y.guanLiYuanMing=#{username}
+	</select>
+	<select id="findAll" resultType="com.java98k.alipay.entity.SysUser">
+		select * from yonghubiao
+	</select>
+	<insert id="insertAll">
+		
+	</insert>
+</mapper>

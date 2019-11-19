@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.java98k.alipay.dao.ChongQianDao">
+	<update id="chongQian">
+		update yonghubiao set yuE=yuE+#{yuE} where yongHuMing=#{yhm}
+	</update>
+	<update id="update">
+		update yonghubiao 
+		set yongHuDengJi=1 
+		where yongHuMing=#{yhm} 
+	</update>
+	<update id="updateQian">
+		update yonghubiao
+		set yuE=#{allQian}
+		where yongHuMing=#{yhm} 
+	</update>
+	
+</mapper>

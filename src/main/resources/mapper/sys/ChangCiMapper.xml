@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.java98k.alipay.dao.ChangCiDao">
+	<select id="findYingTing"
+		resultType="com.java98k.alipay.vo.ChangCiBiao">
+		select * from changcibiao
+		where dianYingID=#{id}
+	</select>
+	<select id="findCity" resultType="String">
+		select y.chengShi from yingtingbiao y
+		where y.yingTingID=#{id}
+	</select>
+	<select id="selectChangCiID" resultType="int">
+		select id from changcibiao 
+		where yingTingMingCheng = #{ytnm} 
+		and yingYuanMingCheng = #{yynm} 
+		and shiJian = #{sj} 
+		and fangYingShiJian = #{fysj}
+	</select>
+	<select id="findByChangCiID" resultType="int">
+		select jiaGe from changcibiao 
+		where id = #{id} 
+	</select>
+</mapper>

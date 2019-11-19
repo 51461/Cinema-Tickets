@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>忘记密码界面</title>
+<link rel="stylesheet" href="css/reset.css" />
+<link rel="stylesheet" href="css/common.css" />
+<link rel="stylesheet" href="css/font-awesome.min.css" />
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript">
+	var yzm = null;
+	$(function() {
+		//获取短信验证码
+		var validCode = true;
+		$(".msgs").click(function() {
+			var phone = $("#sjh").val()
+			var time = 60;
+			var code = $(this);
+			if (validCode) {
+				validCode = false;
+				code.addClass("msgs1");
+				var t = setInterval(function() {
+					time--;
+					code.html(time + "秒");
+					if (time == 0) {
+						clearInterval(t);
+						code.html("重新获取");
+						validCode = true;
+						code.removeClass("msgs1");
+					}
+				}, 1000)
+			}
+			var url = "doWangJiMiMa";
+			var params = {
+				"phone" : phone
+			}
+			$.post(url, params, function(result) {
+				if (result.state == 1) {
+					yzm = result.message;
+				}else{
+					alert()
+				}
+			})
+		})
+	})
+</script>
+<style type="text/css">
+#yanzheng {
+	width: 150px;
+	height: 30px;
+	margin: 5px;
+	border: none;
+	font-family: "微软雅黑";
+	font-size: 15px;
+	color: #666;
+}
+</style>
+</head>
+<body>
+	<div class="wrap login_wrap">
+		<div class="content">
+			<div class="login_box">
+
+				<div class="login_form">
+					<div class="login_title">忘记密码</div>
+					<form action="#" method="post">
+							<div style="text-align: center; color:red" id="err-ms"></div>
+						<div class="form_text_ipt">
+							<input name="username" id="username" type="text" placeholder="请您输入用户名/邮箱/手机">
+						</div>
+						<div class="ececk_warning">
+							<span>用户名/邮箱/手机不能为空</span>
+						</div>
+						<div class="form_text_ipt">
+							<input name="code" id="newPwd" type="password" placeholder="请输入新密码">
+						</div>
+						<div class="ececk_warning">
+							<span>新密码不能为空</span>
+						</div>
+						<div class="form_text_ipt">
+							<input name="code" id="cfgPwd" type="password" placeholder="请确认密码">
+						</div>
+						<div class="ececk_warning">
+							<span>确认密码不能为空</span>
+						</div>
+						<div class="form_text_ipt">
+							<input id="sjh" name="repassword" type="text"
+								placeholder="请输入手机号">
+						</div>
+						<div class="ececk_warning">
+							<span>手机号不能为空</span>
+						</div>
+						<div class="form_text_ipt" style="">
+							<input id="yanzheng" name="code" type="text" placeholder="验证码">
+							<span class="msgs">获取短信验证码</span>
+						</div>
+						<div class="ececk_warning">
+							<span>验证码不能为空</span>
+						</div>
+						<div class="form_btn">
+							<button type="button" class="btn">确定</button>
+						</div>
+
+					</form>
+					<div class="other_login">
+						<div class="left other_left">
+						</div>
+						<div class="right other_right">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/common.js"></script>
+	<div style="text-align: center;">
+		<p></p>
+	</div>
+
+
+	<script type="text/javascript">
+	
+	$(function() {
+		$(".btn").click(doUpdatePassword);
+		/* $(".form_text_ipt").on("onblur", ".checkUsername", doCheckUsername); */
+	});
+	
+	function doUpdatePassword() {
+		var yyy=$("#yanzheng").val()
+		var yhm=$("#username").val()
+		console.log(yzm)
+		if (yyy==yzm) {
+		}else {
+			alert("验证码错误");
+			return;
+		}
+		var params = {
+			username : $("#username").val(),
+			newPwd : $("#newPwd").val(),
+			cfgPwd : $("#cfgPwd").val()
+		}
+		var url = "doUpdatePwd";
+		console.log("params", params);
+		$.post(url, params, function(result) {
+			if (result.state == 1) {
+				location.href = "doIndexUI?yhm="+yhm
+			}else{
+				 console.log(result.message); 
+				$("#err-ms").html("<span>"+result.message+"</span>");
+			}
+			return false;//防止刷新时重复提交
+		});
+	}
+	/* 实现AJAX检查用户名是否存在 */
+	function doCheckUsername() {
+		//1.获取用户名
+		var username = $("#username").val().trim();
+		//2.判断用户名是否为空
+		if (username == "") {
+			setMsg("用户名不能为空!");
+			return;
+		}
+	}	
+	function setMsg(msg) {
+		console.log(msg)
+		$("#err-msg").html(msg);
+	}
+	
+	</script>
+</body>
+</html>

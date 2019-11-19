@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>登录界面</title>
+<link rel="stylesheet" href="css/reset.css" />
+<link rel="stylesheet" href="css/common.css" />
+<link rel="stylesheet" href="css/font-awesome.min.css" />
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript">
+	var yzm = null;
+	$(function() {
+		//获取短信验证码
+		var validCode = true;
+		$(".msgs").click(function() {
+			var phone = $("#sjh").val()
+			var time = 60;
+			var code = $(this);
+			if (validCode) {
+				validCode = false;
+				code.addClass("msgs1");
+				var t = setInterval(function() {
+					time--;
+					code.html(time + "秒");
+					if (time == 0) {
+						clearInterval(t);
+						code.html("重新获取");
+						validCode = true;
+						code.removeClass("msgs1");
+
+					}
+				}, 1000)
+			}
+			var url = "doDLYanZheng";
+			var params = {
+				"phone" : phone
+			}
+			$.post(url, params, function(result) {
+				if (result.state == 1) {
+					yzm = result.message;
+				}else{
+					alert(result.message);
+				}
+			})
+		})
+	})
+</script>
+<style type="text/css">
+#yanzheng {
+	width: 150px;
+	height: 30px;
+	margin: 5px;
+	border: none;
+	font-family: "微软雅黑";
+	font-size: 15px;
+	color: #666;
+}
+</style>
+</head>
+<body>
+	<div class="wrap login_wrap">
+		<div class="content">
+			<div class="logo"></div>
+			<div class="login_box">
+				<div class="login_form" id="login_form">
+					<div class="login_title">手机号验证登录</div>
+					<form action="#" method="post">
+						<div style="text-align: center; color: red" id="err-ms"></div>
+						<div class="form_text_ipt">
+							<input id="sjh" name="repassword" type="text"
+								placeholder="请输入手机号">
+						</div>
+						<div class="ececk_warning">
+							<span>手机号不能为空</span>
+						</div>
+						<div class="form_text_ipt" style="">
+							<input id="yanzheng" name="code" type="text" placeholder="验证码">
+							<span class="msgs">获取短信验证码</span>
+						</div>
+						<div class="ececk_warning">
+							<span>验证码不能为空</span>
+						</div>
+						<div class="form_check_ipt">
+							<div class="left check_left">
+								<label><input name="" type="checkbox" id="rememberId">
+									下次自动登录</label>
+							</div>
+							<div class="right check_right">
+								<a class="forgetPwd">忘记密码</a>
+							</div>
+						</div>
+						<div class="form_btn">
+							<button type="button" class="btn">登录</button>
+						</div>
+						<div class="form_reg_btn">
+							<span>还没有帐号？</span><a class="register">马上注册</a>
+						</div>
+					</form>
+					<div class="other_login">
+						<div class="left other_left">
+							<span></span>
+						</div>
+						<div class="right other_right">
+							<span></span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/common.js"></script>
+	<div style="text-align: center;">
+		<p></p>
+	</div>
+	<script type="text/javascript">
+		$(function() {
+			$(".btn").click(doLogin);
+		});
+		function doLogin() {
+			var yyy=$("#yanzheng").val()
+			console.log(yzm)
+			if (yyy==yzm) {
+				alert("登录成功");
+			}else {
+				alert("验证码错误");
+				return;
+			}
+			var yhm=$("#sjh").val()
+			location.href = "doIndexUI?yhm="+yhm
+		}
+		//设置提示消息到id为err-msg的div中
+		function setMsg(msg) {
+			console.log(msg)
+			$("#err-msg").html(msg);
+		}
+		$(function() {
+			doLoadUI("forgetPwd", "doForgetPwdUI");
+			doLoadUI("register", "doRegisterUI");
+			doLoadUI("load-user-id", "doQiTaUI");
+		});
+		function doLoadUI(class1, url) {
+			$("." + class1).click(function() {
+				$(".login_box").load(url);
+			});
+		}
+	</script>
+</body>
+</html>

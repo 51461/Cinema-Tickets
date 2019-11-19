@@ -1,0 +1,178 @@
+#main{
+	width:1920px;
+	height:1080px;
+	MARGIN-RIGHT:auto;
+	MARGIN-LEFT:auto;
+}
+body {
+	overflow: auto;
+	padding-left: 155px;
+	padding-right: 155px;
+}
+
+.top {
+	background-color: #FEC0D7;
+	border-style:outset;
+	border-color:white;
+}
+
+.logo {
+	float: left;
+}
+
+#logo {
+	width: 20px;
+	height: 20px;
+	padding-bottom: 5px;
+	padding-top: 5px;
+}
+
+.button1,.grxx {
+	font-size: x-large;
+	padding-bottom: 5px;
+	background-color: #DFDFDF;
+	color: black;
+	border: none;
+}
+
+
+.button1:hover,.grxx:hover {
+	background-color: black;
+	color: white;
+}
+
+.ul li {
+	margin: 0 5%;
+	font-size: 50px;
+}
+
+#time{
+	float: right;
+}
+
+#text {
+	float: left;
+	padding-bottom: 12px;
+	padding-top: 12px;
+}
+
+.text {
+	font-weight: bold;
+	padding-left: 135px;
+	font-size: 30px;
+	font-color:white;
+}
+
+.bodyOne td {
+	padding-left: 100px;
+	padding-right: 100px;
+}
+
+.bodyTwo td {
+	text-decoration: none;
+	color: black;
+	padding: 0;
+	font-size: 0px;
+	width: 260px;
+	height: 100px;
+}
+.bodyTwo td input:hover{
+	background-color: red;
+}
+
+#button1 {
+	width: 90%;
+	height: 50px;
+}
+
+#banner {
+	margin: 0;
+	font-family: "微软雅黑";
+	background-color: #1F1F1F;
+	width: 1800px;
+	height: 888px;
+	margin: 0 auto;
+}
+
+.example {
+	width: 1700px;
+	height: 880px;
+	font-size: 40px;
+	text-align: center;
+	margin: 20px auto;
+	background-color: #464576;
+}
+
+.carousel-item {
+	line-height: 336px;
+	color: #fff;
+	font-family: Arial Black;
+}
+
+.ft-carousel {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+.ft-carousel .carousel-inner {
+	position: absolute;
+	left: 0;
+	top: 0;
+	height: 100%;
+}
+
+.ft-carousel .carousel-inner .carousel-item {
+	float: left;
+	height: 100%;
+}
+
+.ft-carousel .carousel-item img {
+	width: 100%;
+}
+
+.ft-carousel .carousel-indicators {
+	position: absolute;
+	left: 0;
+	bottom: 10px;
+	width: 100%;
+	text-align: center;
+	font-size: 0;
+}
+
+.ft-carousel .carousel-indicators span {
+	display: inline-block;
+	width: 12px;
+	height: 12px;
+	background-color: #fff;
+	margin: 0 4px;
+	border-radius: 50%;
+	cursor: pointer;
+}
+
+.ft-carousel .carousel-indicators span.active {
+	background-color: #de3a3a;
+}
+
+.ft-carousel .carousel-btn {
+	position: absolute;
+	top: 50%;
+	width: 50px;
+	height: 45px;
+	margin-top: -25px;
+	cursor: pointer;
+}
+
+.ft-carousel .carousel-prev-btn {
+	left: 0;
+	background: url(../images/prev.png) no-repeat;
+}
+
+.ft-carousel .carousel-next-btn {
+	right: 0;
+	background: url(../images/next.png) no-repeat;
+}
+.bodyOne td:hover{
+	transform:scale(1.1);
+}

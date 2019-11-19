@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.java98k.alipay.dao.YongHuDao">
+	<select id="findUserByUserName"
+		resultType="com.java98k.alipay.entity.SysUser">
+		select *
+		from yonghubiao
+		where yongHuMing=#{username}
+	</select>
+	<select id="findByPhone"
+		resultType="int">
+		select count(*)
+		from yonghubiao
+		where phone=#{phone}
+	</select>
+	<select id="findByname"
+		resultType="int">
+		select yuE 
+		from yonghubiao 
+		where yongHuMing=#{name} 
+	</select>
+	<select id="selcetID"
+		resultType="int">
+		select yongHuID 
+		from yonghubiao 
+		where yongHuMing=#{name} 
+	</select>
+	<update id="updatePassword">
+		update yonghubiao
+		set miMa=#{password},
+		salt=#{salt} 
+		where yongHuID=#{id}
+	</update>
+	<insert id="insertUser" parameterType="com.java98k.alipay.entity.SysUser">
+		insert into yonghubiao(yongHuMing,miMa,yongHuDengJi,phone,salt) values  
+		(#{yongHuMing},#{miMa},1,#{phone},#{salt})
+	</insert>
+</mapper>

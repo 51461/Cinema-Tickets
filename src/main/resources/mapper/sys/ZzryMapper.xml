@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.java98k.alipay.dao.ZzryDao">
+    <sql id="queryWhereId">
+       from dianyingbiao
+       <where>
+             jiJiangShangYing=0
+       </where>
+    </sql>
+    <!-- 系统底层解析此元素时,会将元素信息封装到一个
+    MappedStatement对象中 -->
+    <select id="findPageObjects"
+            resultType="com.java98k.alipay.vo.DianYingPojo">
+           select *
+           <include refid="queryWhereId"/>
+           <!-- order by createdTime desc -->
+           limit #{startIndex},#{pageSize}
+    </select>
+    <select id="getRowCount" resultType="int">
+          select count(*)
+          <include refid="queryWhereId"/>
+    </select>
+   
+    <delete id="deleteObjects">
+        delete from dianyingbiao
+        where id in (1,2,3,4,5)
+        <foreach collection="ids"
+                 open="("
+                 close=")"
+                 separator=","
+                 item="id">
+             #{id}
+        </foreach>
+    </delete>
+</mapper>

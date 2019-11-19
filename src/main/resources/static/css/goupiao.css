@@ -1,0 +1,83 @@
+body {
+	overflow: auto;
+	padding-left: 155px;
+	padding-right: 155px;
+}
+
+.top {
+	background-color: #FEC0D7;
+	text-align: center;
+	height: 100px;
+	border-style:outset;
+	border-color:white;
+}
+
+.logo {
+	float: left;
+}
+
+#logo {
+	width: 20px;
+	height: 20px;
+	padding-bottom: 5px;
+	padding-top: 5px;
+}
+
+.button1 {
+	font-size: x-large;
+	padding-bottom: 5px;
+	background-color: #DFDFDF;
+	border: none;
+}
+
+.button1:hover {
+	background-color: black;
+	color: white;
+}
+.ul li {
+	display: inline-block;
+	margin: 0 5%;
+	font-size: 50px;
+}
+
+#text {
+	float: left;
+	padding-bottom: 12px;
+	padding-top: 12px;
+}
+.text{
+	font-size: 20px;
+	padding: 100px;
+}
+.button2{
+	padding-left: 100px;
+}
+.button2 input:hover{
+	background-color: red;
+}
+.riqi{
+	padding-left: 100px;
+}
+.riqi p{
+	font-size: 20px;
+}
+.riqi input{
+	width: 150px;
+	height: 50px;
+	font-size: larger;
+	margin: 0 3%;
+}
+.tableTwo{
+	padding-left: 100px;
+}
+.tableTwo tr td{	
+	height: 150px;
+	padding-right: 100px;
+}
+.tableTwo tr td input{
+	width: 150px;
+	height: 50px;
+}
+.tableTwo tr td input:hover{
+	background-color: red;
+}

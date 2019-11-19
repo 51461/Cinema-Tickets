@@ -1,0 +1,517 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>兄弟盟电影院</title>
+<link rel="stylesheet" href="css/index.css" />
+<link href="css/dianying.css" type="text/css" rel="stylesheet" />
+<link href="css/goupiao.css" type="text/css" rel="stylesheet" />
+<link href="css/yingting.css" type="text/css" rel="stylesheet" />
+<link href="css/ft-carousel.css" type="text/css" rel="stylesheet" />
+<style type="text/css">
+#container {
+	margin: 200px auto;
+	width: 1500px;
+	border-left: solid;
+	border-left-width: 10px;
+	border-left-color: darkred;
+	border-right: solid;
+	border-right-width: 10px;
+	border-right-color: darkred;
+	background-color: orange;
+	height: 1000px;
+}
+
+#yh {
+	font-size: 50px;
+	line-height: 100px;
+	padding-left: 300px;
+}
+
+#hy {
+	width: 150px;
+	height: 50px;
+	font-size: 25px;
+}
+
+p {
+	padding-left: 200px;
+}
+
+.button1-1 {
+	width: 150px;
+	height: 50px;
+	margin-left: 300px;
+	font-size: 25px;
+}
+
+.button2-1 {
+	width: 150px;
+	height: 50px;
+	font-size: 25px;
+}
+
+.dy {
+	font-size: 25px;
+	padding-left: 250px;
+	width: 1300px;
+}
+
+.sy {
+	float: right;
+	width: 150px;
+	height: 50px;
+	font-size: 25px;
+}
+</style>
+</head>
+
+<body background="images/dl6.png" width="100%" height="100%">
+	<div id="main" class="main">
+		<div id="top" class="top">
+			<div class="logo">
+				<img src="images/first.png" width="100px" height="100px" />
+			</div>
+			<div>
+				<font id="text" size="7">兄弟盟电影院</font>
+			</div>
+			<div>
+				<ul class="ul">
+					<li id="city"><select id="choseCity"
+						style="font-size: x-large; padding-bottom: 5px; border: none;">
+							<option value="北京">北京</option>
+							<option value="上海">上海</option>
+					</select></li>
+					<li><input class="button1" type="button" value="首页"
+						onclick="sy()" /></li>
+					<li><input id="grxx" class="grxx" type="button" value="个人信息"
+						onclick="grxx(this)" /></li>
+
+					<li class="input-group-btn"><input type="text" id="searchName"
+						placeholder="根据电影名，演员名搜索"
+						style="font-size: x-large; padding-bottom: 5px; width: 280px" />
+						<input type="button" class="souSou" value="搜索"
+						style="font-size: x-large; padding-bottom: 5px;" /></li>
+				</ul>
+			</div>
+		</div>
+		<div>
+			<span id="time" style="font-size: 20px"></span>
+		</div>
+		<script type="text/javascript">
+			function oneValues() {
+				var result;
+				var url = window.location.search; //获取url中"?"符后的字串  
+				if (url.indexOf("?") != -1) {
+					result = url.substr(url.indexOf("=") + 1);
+				}
+				console.log(result);
+				return result;
+			}
+			var yhm = oneValues();
+			function show() {
+				var d = new Date();
+				var h = d.getHours();
+				var m = d.getMinutes();
+				var ms = d.getSeconds();
+				d = checktime(d);
+				h = checktime(h);
+				m = checktime(m);
+				ms = checktime(ms);
+				function checktime(i) {
+					if (i < 10) {
+						i = "0" + i;
+					}
+					return i;
+				}
+				 if (h < 12) {
+					document.getElementById("time").innerHTML = "早上好，" +yhm+ " <br>现在时间：" + h + ":" + m + ":" + ms;
+				} else if (h < 14) {
+					document.getElementById("time").innerHTML = "中午好，"+yhm+"<br>现在时间："+ h + ":" + m + ":" + ms;
+				} else {
+					document.getElementById("time").innerHTML = "下午好，"+yhm+"<br>现在时间："+ h + ":" + m + ":" + ms;
+				} 
+			}
+			setInterval("show()", 1000);
+		</script>
+		<div id="msnzs">
+			<h1 align="center">本周热映</h1>
+			<div id="banner">
+				<div class="example">
+					<div class="ft-carousel" id="carousel_1">
+						<ul class="carousel-inner">
+							<li class="carousel-item"><img src="pages/dianYing/101.png"
+								id="1" onclick="dianji(this)" class="msn1" /></li>
+							<li class="carousel-item"><img src="pages/dianYing/3.png"
+								id="3" onclick="dianji(this)" class="msn3" /></li>
+							<li class="carousel-item"><img src="pages/dianYing/4.png"
+								id="4" onclick="dianji(this)" class="msn4" /></li>
+						</ul>
+					</div>
+				</div>
+
+
+			</div>
+			<br /> <br /> <br /> <br />
+			<div id="0" class="msn5" onclick="dianji2(this)"
+				style="font-size: 35px; font-weight: bold; width: 140px">正在热映</div>
+			<div>
+				<table class="tableOne" align="center">
+					<tr class="bodyOne">
+						<td><img id="1" class="msn" src="pages/dianYing/1.png"
+							width="260px" onclick="dianji(this)" /></td>
+						<td><img id="3" class="msn" src="pages/dianYing/3.png"
+							width="260px" onclick="dianji(this)" /></td>
+						<td><img id="4" class="msn" src="pages/dianYing/4.png"
+							width="260px" onclick="dianji(this)" /></td>
+						<td><img id="5" class="msn" src="pages/dianYing/5.png"
+							width="260px" onclick="dianji(this)" /></td>
+					</tr>
+					<tr class="bodyTwo" align="center">
+						<td><input id="1" class="msn" type="button" value="建国大业"
+							onclick="dianji(this)"
+							style="width: 260px; height: 40px; letter-spacing: 10px; font-size: large;" /></td>
+						<td><input id="3" class="msn" type="button" value="功夫"
+							onclick="dianji(this)"
+							style="width: 260px; height: 40px; letter-spacing: 10px; font-size: large;" /></td>
+						<td><input id="4" class="msn" type="button" value="美人鱼"
+							onclick="dianji(this)"
+							style="width: 260px; height: 40px; letter-spacing: 10px; font-size: large;" /></td>
+						<td><input id="5" class="msn" type="button" value="赌圣"
+							onclick="dianji(this)"
+							style="width: 260px; height: 40px; letter-spacing: 10px; font-size: large;" /></td>
+					</tr>
+				</table>
+			</div>
+			<br /> <br />
+			<div id="1" class="msn5" onclick="dianji2(this)"
+				style="font-size: 35px; font-weight: bold; width: 140px">即将上映</div>
+			<br /> <br />
+			<div>
+				<table class="tableOne" align="center">
+					<tr class="bodyOne">
+						<td><img id="2" class="msn" src="pages/dianYing/2.png"
+							width="260px" onclick="dianji(this)" /></td>
+						<td><img id="7" class="msn" src="pages/dianYing/7.png"
+							width="260px" onclick="dianji(this)" /></td>
+						<td><img id="9" class="msn" src="pages/dianYing/9.png"
+							width="260px" onclick="dianji(this)" /></td>
+						<td><img id="11" class="msn" src="pages/dianYing/11.png"
+							width="260px" onclick="dianji(this)" /></td>
+					</tr>
+					<tr class="bodyTwo" align="center">
+						<td><input id="2" class="msn" type="button" value="无间道"
+							onclick="dianji(this)"
+							style="width: 260px; height: 40px; letter-spacing: 10px; font-size: large;" /></td>
+						<td><input id="7" class="msn" type="button" value="扫毒"
+							onclick="dianji(this)"
+							style="width: 260px; height: 40px; letter-spacing: 10px; font-size: large;" /></td>
+						<td><input id="9" class="msn" type="button" value="喜剧之王"
+							onclick="dianji(this)"
+							style="width: 260px; height: 40px; letter-spacing: 10px; font-size: large;" /></td>
+						<td><input id="11" class="msn" type="button" value="我不是药神"
+							onclick="dianji(this)"
+							style="width: 260px; height: 40px; letter-spacing: 10px; font-size: large;" /></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+	<script src="js/jquery-1.4.2.js"></script>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/ft-carousel.min.js"></script>
+
+	<script type="text/javascript">
+		$("#carousel_1").FtCarousel();
+
+		$("#carousel_2").FtCarousel({
+			index : 1,
+			auto : false
+		});
+
+		$("#carousel_3").FtCarousel({
+			index : 0,
+			auto : true,
+			time : 1000,
+			indicators : false,
+			buttons : true
+		});
+		$(function() {
+
+			doLoadUI("msn", "doDianYingUI");
+			doLoadUI("msn1", "doDianYingUI");
+			doLoadUI("msn3", "doDianYingUI");
+			doLoadUI("msn4", "doDianYingUI");
+			doLoadUI("msn5", "doZzryUI");
+			$(".input-group-btn").on("click", ".souSou", doGetObjects)
+
+		})
+		function grxx(ob){
+			var yhm = oneValues();
+			var params = {
+					"yhm" : yhm
+			};
+			var url = "doGrxxUI";
+			$("#msnzs").load(url);
+			var url2 = "doGrxx";
+			$.post(url2, params, function(jsonResult) {
+				dosetresult6(jsonResult);
+			});
+		}
+		 function dosetresult6(jsonResult) {
+			
+			if (jsonResult.state == 1) {
+				for(var i=0;i<jsonResult.data.length;i++){
+					var result = jsonResult.data[i];
+						 $("#yhm").empty();
+							$("#yhm").append(result.yongHuMing);  
+							 $("#dj").empty();
+							 if(result.yongHuDengJi==1){
+								 $("#dj").append("会员");
+							 }else{
+								 $("#dj").append("普通用户");
+							 }
+							 $("#q").empty();
+							$("#q").append(result.yuE);  
+							 $("#yp"+i).append(result.dianYingMingCheng);
+							$("#sj"+i).append(result.shiJian);
+							$("#yy"+i).append(result.yinYuanMingCheng);  
+							$("#zw"+i).append(result.zuoWeiPaiShu+"排"+result.zuoWeiLieShu+"列");
+							
+						} 
+				}
+		 }	
+		function doGetObjects() {
+			var name = $("#searchName").val();
+			var url = "sou/doSouSuo"
+			var params = {
+				"name" : name
+			}
+
+			$.post(url, params, function(result) {
+				if (result.state) {
+					//alert(result.message)
+					window.location.href = "sou/doSouSuoUI?name="
+							+ result.message
+				}
+
+			})
+		}
+
+		function doLoadUI(id, url) {
+			$("." + id).click(function() {//事件处理函数
+				$("#msnzs").load(url);
+				//load函数为jQuery中的一个异步函数
+			})
+		}
+		function dianji(ob) {
+			
+			var id = $(ob).attr("id");
+
+			var params = {
+				id : id
+			};
+
+			var url = "doDianYing";
+			$.post(url, params, function(jsonResult) {
+				dosetresult(jsonResult);
+
+			})
+
+			var url2 = "pinglun/showPingLun";
+			$.post(url2, params, function(jsonResult) {
+				
+				doPingLun(jsonResult);
+
+			})
+			//var url = "doYanYuan";
+			//$.post(url, params, function(jsonResult) {
+			//	dosetresults(jsonResult);
+			//})
+		}
+
+		function doPingLun(jsonResult) {
+
+			// 			var it = jsonResult.entrySet().iterator();
+			// 	        while (it.hasNext()) {
+			//  	            var entity = it.next();            
+			// 	            alert("key: "+entity.getKey());
+			// 	            alert("value: "+entity.getValue());
+			// 	        }
+
+			if (jsonResult.state == 1) {
+				doPingLun2(jsonResult.data)
+			}
+		}
+
+		function doPingLun2(result) {
+			//alert(result)
+			var tBody = $("#tbodyId");
+			tBody.empty();
+			//2.将记录records进行呈现
+			//2.1迭代记录集
+			for (var i = 0; i < result.length; i++) {
+				//2.2 创建tr对象
+				var tr = $("<tr></tr>");
+				//2.3 创建多个td对象
+				var tds = dopl(result[i]);
+				//2.4 将td对象追加到tr中
+				tr.append(tds);
+				//2.5 将tr追加到tbody中
+				tBody.append(tr);
+			}
+		}
+
+		function dopl(data) {
+			var date = new Date(data.shiJian);
+			var year = date.getFullYear()
+			var month = date.getMonth() + 1
+			var day = date.getDate()
+
+			var tds = "<tr>" + "<td class='ping1' >"
+					+ "<hr color='black' style='width:1000px'/>"
+					+ data.name
+					+ "</td>"
+					+ "</tr>"
+					+ "<tr>"
+					+ "<td class='ping2' >给作品打了"
+					+ data.pingFen
+					+ "分</td>"
+					+ "</tr>"
+					+ "<tr>"
+					+ "<td class='ping3' >"
+					+ data.pingLun
+					+ "</td>"
+					+ "</tr>"
+					+ "<tr>"
+					+ "<td class='ping2' >"
+					+ year
+					+ "/" + month + "/" + day + "</td>" + "</tr>";
+
+			return tds;
+		}
+
+		function dosetresult(jsonResult) {
+
+			if (jsonResult.state == 1) {
+				dosetjsonResult(jsonResult.data)
+
+			}
+		}
+		function dosetjsonResult(result) {
+			
+
+			$(".dym").empty();
+			$(".dym").append(result[1].dianYingMingCheng)
+
+			$(".sysh").empty();
+			$(".sysh").append(result[1].shiJian)
+			$(".sc").empty();
+			$(".sc").append(result[1].shiChang)
+			$(".pf").empty();
+			$(".pf").append(result[1].dianYingZongHePingFen)
+			$(".jqjj").empty();
+			$(".jqjj").append(result[1].dianYingJieShao)
+			$(".dytp").attr("src", result[1].dianYingTuPian)
+
+			for (var i = 0, j = 1, k = 5; i < result.length; i++, j++, k++) {
+
+				$(".yy" + j).attr("src", result[i].yanYuanDaoYanTuPian)
+				$(".yy" + k).attr("value", result[i].mingZi)
+				$("#yy" + j).attr("href",
+						"https://baike.baidu.com/item/" + result[i].mingZi)
+				$("#yy" + k).attr("href",
+						"https://baike.baidu.com/item/" + result[i].mingZi)
+			}
+		}
+		function dianji2(ob) {
+
+			var id = $(ob).attr("id");
+
+			var params = {
+				id : id
+			};
+			var url = "doZzry";
+
+			$.post(url, params, function(jsonResult) {
+				dosetresult2(jsonResult);
+			})
+		}
+		function dosetresult2(jsonResult) {
+			if (jsonResult.state == 1) {
+				dosetjsonResult2(jsonResult.data)
+			}
+		}
+
+		function dosetjsonResult2(result) {
+
+			//1.获取tbody对象,并清空
+			var tBody = $("#tbodyId");
+			tBody.empty();
+			//2.将记录records进行呈现
+			//2.1迭代记录集
+			for (var i = 0; i < result.length; i++) {
+				//2.2 创建tr对象
+				var tr = $("<tr></tr>");
+				//2.3 创建多个td对象
+				var tds = dodl(result[i]);
+				//2.4 将td对象追加到tr中
+				tr.append(tds);
+				//2.5 将tr追加到tbody中
+				tBody.append(tr);
+
+				$(function() {
+					doLoadUI("big", "doDianYingUI");
+				})
+				function doLoadUI(id, url) {
+					$("." + id).click(function() {
+						$("#msnzs1").load(url);
+					})
+				}
+
+			}
+		}
+		/*for(var i=0;i<result.length;i++){
+			$(".dym").empty();
+			$(".dym").append(result[i].dianYingMingCheng)
+			$(".sysh").empty();
+			$(".sysh").append(result[i].shiJian)
+			$(".sc").empty();
+			$(".sc").append(result[i].shiChang)
+			$(".pf").empty();
+			$(".pf").append(result[i].dianYingZongHePingFen)
+			$(".dytp").attr("src",result[i].dianYingTuPian)
+		}*/
+		function dodl(data) {
+			var tds = "<tr>" + "<td rowspan='6'><img class='big' id='"
+					+ data.dianYingID
+					+ "' src="
+					+ data.dianYingTuPian
+					+ " width='260px' height='450px'onclick='dianji(this)' /></td>"
+					+ "</tr>" + "<tr>" + "<td></td><td><font class='text'>电影名："
+					+ data.dianYingMingCheng
+					+ "</font></td><td class='dym'></td>" + "</tr>" + "<tr>"
+					+ "<td></td><td><font class='text'>上映时间123：" + data.shiJian
+					+ "</font></td><td class='sysh'></td>" + "</tr>" + "<tr>"
+					+ "<td></td><td><font class='text'>电影时长：" + data.shiChang
+					+ "</font></td><td class='sc'></td>" + "</tr>" + "<tr>"
+					+ "<td></td><td><font class='text'>电影综合评价："
+					+ data.dianYingZongHePingFen
+					+ "</font></td><td class='pf'></td>" + "</tr>" +
+					//"<tr>"+"<td></td><td><font class='text'>剧情介绍："+data.dianYingJieShao+"</font></td><td class='pf'></td>"+"</tr>"+
+					"<tr>" + "<td></td><td><font class='text'>电影类型："
+					+ data.dianYingLeiXing + "</font></td><td class='pf'></td>"
+					+ "</tr>" + "<tr><td height='50px'> <td/></tr>";
+
+			return tds;
+
+		}
+		function sy() {
+			 location.replace("doIndexUI?yhm="+yhm);
+		}
+	</script>
+
+</body>
+
+</html>
